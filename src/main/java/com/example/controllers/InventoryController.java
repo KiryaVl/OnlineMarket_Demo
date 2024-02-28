@@ -16,12 +16,21 @@ public class InventoryController {
     @Autowired
     private InventoryRepository inventoryRepository;
 
+    /**
+     * Метод создания товара и добавления его на "склад"
+     * @param inventoryItem
+     * @return Создание единицы товара
+     */
     @PostMapping("/add")
     public ResponseEntity<String> addProductToInventory(@RequestBody InventoryItem inventoryItem) {
         inventoryRepository.save(inventoryItem);
         return ResponseEntity.status(HttpStatus.CREATED).body("Product added to inventory successfully.");
     }
 
+    /**
+     * Метод вывода всех единиц товара на складе
+     * @return Список товаров
+     */
     @GetMapping("/list")
     public ResponseEntity<List<InventoryItem>> getAllProducts() {
         List<InventoryItem> productList = inventoryRepository.findAll();

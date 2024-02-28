@@ -4,7 +4,6 @@ import com.example.exceptions.NotFoundException;
 import com.example.exceptions.InsufficientStockException;
 import com.example.models.InventoryItem;
 import com.example.repositoryes.InventoryRepository;
-import com.example.repositoryes.PaymentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -14,9 +13,6 @@ public class WarehouseService {
 
     @Autowired
     private InventoryRepository inventoryRepository;
-
-    @Autowired
-    private PaymentRepository paymentRepository; //
 
     @Transactional
     public void reserveProduct(Long productId, int quantity) {

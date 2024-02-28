@@ -20,12 +20,17 @@ public class ProductController {
     @Autowired
     private PaymentService paymentService;
 
+
+    /**
+     * Метод заказа товара
+     * @param productId Ид товара
+     * @param quantity Количество
+     * @return Обработка запроса о заказе товара, либо об ошибке заказа.
+     */
     @PostMapping("/reserve")
     public ResponseEntity<String> reserveProduct(@RequestParam("productId") Long productId, @RequestParam("quantity") int quantity) {
         try {
-            // Логика резервирования товара на складе
             warehouseService.reserveProduct(productId, quantity);
-            // Логика оплаты товара
             paymentService.processPayment(productId, quantity);
             return ResponseEntity.ok("Product reserved and payment processed successfully.");
         } catch (Exception e) {

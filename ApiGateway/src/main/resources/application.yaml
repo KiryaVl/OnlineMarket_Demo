@@ -1,0 +1,11 @@
+server:
+  port:
+    8086
+spring:
+  application:
+    name: api-gateway
+routes:
+  - id: tasks
+    uri: http://localhost:8080/inventory
+    predicates:
+      - Path=/inventory/**

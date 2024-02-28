@@ -19,7 +19,6 @@ public class Payment {
 
     private double amount;
 
-    // Геттеры и сеттеры
     public Long getId() {
         return id;
     }

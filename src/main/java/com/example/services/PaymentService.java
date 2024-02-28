@@ -14,12 +14,11 @@ public class PaymentService {
 
     @Transactional
     public void processPayment(Long productId, int quantity) {
-        // Предположим, что здесь происходит логика оплаты товара
         // Создание записи об оплате в базе данных
         Payment payment = new Payment();
         payment.setProductId(productId);
         payment.setQuantity(quantity);
-        payment.setAmount(10 * quantity); // Предположим, что товар стоит $10 за единицу
+        payment.setAmount(10 * quantity);
         paymentRepository.save(payment);
     }
 }
