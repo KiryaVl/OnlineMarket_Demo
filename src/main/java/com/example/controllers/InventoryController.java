@@ -19,7 +19,8 @@ public class InventoryController {
     @Autowired
     private InventoryRepository inventoryRepository;
 
-    @Autowired
+
+
     private FileGateway fileGateway;
 
     private LocalDateTime localDateTime;
@@ -32,7 +33,6 @@ public class InventoryController {
     @PostMapping("/add")
     public ResponseEntity<String> addProductToInventory(@RequestBody InventoryItem inventoryItem) {
         String time =  LocalDateTime.now().toString();
-
         inventoryRepository.save(inventoryItem);
         fileGateway.writeToFile("Items.txt", "Item added in: " + time);
         return ResponseEntity.status(HttpStatus.CREATED).body("Product added to inventory successfully.");

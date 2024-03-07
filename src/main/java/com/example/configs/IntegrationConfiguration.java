@@ -13,19 +13,19 @@ import java.io.File;
 
 public class IntegrationConfiguration {
 
-    @Bean(name = "messageChannelInput")
-    public MessageChannel messageChannelInput() {
+    @Bean
+    public MessageChannel textInputChannel() {
         return new DirectChannel();
     }
 
     @Bean
-    public MessageChannel messageChannelFileWriter() {
+    public MessageChannel fileWriterChannel() {
         return new DirectChannel();
     }
 
 
     @Bean
-    @Transformer(inputChannel = "messageChannelInput", outputChannel = "messageChannelFileWriter")
+    @Transformer(inputChannel = "textInputChannel", outputChannel = "fileWriterChannel")
     public GenericTransformer<String, String> transformer() {
         return text -> {
            return text.toUpperCase();
@@ -34,9 +34,9 @@ public class IntegrationConfiguration {
 
 
     @Bean
-    @ServiceActivator(inputChannel = "messageChannelFileWriter")
-    public FileWritingMessageHandler myFileWriter() {
-        FileWritingMessageHandler handler = new FileWritingMessageHandler(new File("C:\\Users\\user\\IdeaProjects\\OnlineMarket_Demo\\src\\main\\resources"));
+    @ServiceActivator(inputChannel = "fileWriterChannel")
+    public FileWritingMessageHandler messageHandler() {
+        FileWritingMessageHandler handler = new FileWritingMessageHandler(new File("C:/Users/user/IdeaProjects/OnlineMarket_Demo/src/main/resources"));
         handler.setExpectReply(false);
         handler.setFileExistsMode(FileExistsMode.APPEND);
         handler.setAppendNewLine(true);
